@@ -1,0 +1,101 @@
+import java.util.Scanner;
+
+
+public class Main {
+
+    public static void main(String[] args) {
+        int gamesWon = 0;
+        int gamesLost = 0;
+        Scanner s = new Scanner(System.in);
+        System.out.println("How many games would you like to play?");
+        int n = s.nextInt();
+        int gamesToPlay = n;
+
+        for (int i = 0; i < gamesToPlay; i++)
+            switch(crapsClass.playCraps()) {
+                case 0: gamesLost++;
+                case 1: gamesWon++;
+                default: gamesLost++;
+            }
+        System.out.println(gamesLost + " L");
+        System.out.println(gamesWon + " W");
+    }
+
+}
+
+/* crapsClass.java *\
+import java.security.SecureRandom;
+import java.util.Random;
+
+public class crapsClass {
+    public static int rollDice() {
+        Random random = new Random();
+        //Generate number from 1 to 6
+        int number = random.nextInt(6);
+        return number;
+    }
+
+
+    public static int rollTwoDice() {
+        int dice1 = rollDice();
+        int dice2 = rollDice();
+        int sum = dice1 + dice2;
+        return sum;
+    }
+
+    public static int getResults(int point) {
+        //if 2, 3, or 12 return 0, if 7 or 11 return 1
+        switch (point) {
+            case 2:
+            case 3:
+            case 12:
+                point = 0;
+                break;
+            case 7:
+            case 11:
+                point = 1;
+                break;
+        }
+        return point;
+    }
+
+    public static boolean isNatOrCraps(int result) {
+        return result == 0 || result == 1;
+    }
+
+    public static void printResult(int result) {
+
+        if (result == 0) {
+            System.out.println("You lose");
+        } else if (result == 1) {
+            System.out.println("You win");
+        }
+    }
+
+    public static void rollUntilWinLose(int point) {
+        int result;
+        do {
+            result = rollTwoDice();
+        }
+        while (result != point && result != 7);
+        if (result == 7)
+            printResult(0);
+        else
+            printResult(1);
+    }
+
+    public static int playCraps() {
+        //Roll your dice
+        int point = crapsClass.rollTwoDice();
+        //Check the result
+        int result = crapsClass.getResults(point);
+        //print Result
+        if (crapsClass.isNatOrCraps(result))
+            crapsClass.printResult(result);
+        else {
+            //Continue to roll until win/loss
+            crapsClass.rollUntilWinLose(result);
+        }
+        return result;
+    }
+}
