@@ -1,0 +1,72 @@
+/*
+7.16 (Execution time) Write a program that randomly generates an array of 100,000 integers and a key. Estimate the execution time of invoking the linearSearch method in Listing 7.6.
+ Sort the array and estimate the execution time of invoking the binarySearch method in Listing 7.7.
+ You can use the following code template to obtain the execution time: long startTime = System.currentTimeMillis(); perform the task; long endTime = System.currentTimeMillis(); long executionTime = endTime - startTime;
+ */
+
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Random;
+
+
+public class Main {
+
+    public static void main(String[] args) {
+        // write your code here
+
+        long endTime = System.currentTimeMillis();
+
+        int key = generateNumber();
+
+        Scanner input = new Scanner(System.in);
+        System.out.println("How big do you want the array to be?");
+        int arraySize = input.nextInt();
+
+        int array[] = new int[arraySize];
+        System.out.println(array.length);
+
+        for (int i = 0; i < array.length; i++) {
+            array[i] = generateNumber();
+        }
+        System.out.println();
+// Linear Search
+        long startTimeLinear = System.currentTimeMillis();
+        linearSearch(array, key);
+        long endTimeLinear = System.currentTimeMillis();
+        long totalTime = endTimeLinear - startTimeLinear;
+        System.out.println("Linear Search Time: " + totalTime);
+
+        // Binary Search
+        long binarySearchStart = System.currentTimeMillis();
+        binarySearch(array, key);
+        long binarySearchEnd = System.currentTimeMillis();
+        long binarySearchTotal = binarySearchStart - binarySearchEnd;
+        System.out.println("Binary Search Time: " + totalTime);
+    }
+
+    private static void binarySearch(int[] array, int key) {
+        int result = Arrays.binarySearch(array, key);
+        if (result < 0)
+            System.out.println("Key not found during binary search");
+        else
+            System.out.println("Key found at index: " + result);
+    }
+
+    private static int generateNumber() {
+        Random rand = new Random();
+        int max = 10000;
+        int min = 1;
+        int range = max - min;
+        int number = rand.nextInt(range);
+        return number;
+    }
+
+
+    private static void linearSearch(int[] array, int key) {
+        for (int i = 0; i < array.length; i++) {
+            if (key == array[i]) {
+                System.out.println("Linear search found key at " + array[i]);
+            }
+        }
+    }
+}
