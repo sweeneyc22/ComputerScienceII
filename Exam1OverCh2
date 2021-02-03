@@ -1,0 +1,91 @@
+/* Exam 1
+ * Collection of 4 rules for generating terms of a sequence
+ * Randomly select a rule and starting point
+ * Give user first 4 terms, and ask for 5th
+ * Display result
+ */
+
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int ruleSet = random(1 , 4); // Generates an integer from 1-4
+        int[] emptySequenceArray = new int[5];
+        int lastTerm = 0;
+        System.out.println("Generating first term of the sequence");
+        int term = random(1, 10);
+        System.out.println("Beginning sequence at: " + term);
+
+
+        lastTerm = populateArray(emptySequenceArray, term, lastTerm, ruleSet);
+        System.out.println("\nWhat is the next term in the sequence?");
+
+        int answer = input.nextInt();
+        if (answer == lastTerm) {
+            System.out.println("Correct");
+        }
+        else {
+            System.out.println("Wrong, the correct answer is: " + lastTerm);
+        }
+    }
+
+
+
+
+    private static int populateArray(int[] emptySequenceArray, int term, int lTerm,int ruleSet) {
+        emptySequenceArray[0] = term;
+        switch (ruleSet) {
+            case 1:
+                System.out.println("Sequence Rule 1");
+                for(int i = 1; i < emptySequenceArray.length; i++ ) {
+                    emptySequenceArray[i] = emptySequenceArray[i - 1] * 2;
+                    System.out.print(emptySequenceArray[i] + " ");
+                }
+                lTerm = emptySequenceArray[4] * 2;
+                return lTerm;
+            case 2: System.out.println("Sequence Rule 2");
+                for(int i = 1; i < emptySequenceArray.length; i++ ) {
+                    emptySequenceArray[i] = emptySequenceArray[i - 1] + 5;
+                    System.out.print(emptySequenceArray[i] + " ");
+                }
+                lTerm = emptySequenceArray[4] + 5;
+                return lTerm;
+            case 3: System.out.println("Sequence Rule 3");
+                for(int i = 1; i < emptySequenceArray.length; i++ ) {
+                    emptySequenceArray[i] = emptySequenceArray[i - 1] + 10;
+                    System.out.print(emptySequenceArray[i] + " ");
+                }
+                lTerm = emptySequenceArray[4] + 10;
+                return lTerm;
+            case 4: System.out.println("Sequence Rule 4");
+                for(int i = 1; i < emptySequenceArray.length; i++ ) {
+                    emptySequenceArray[i] = emptySequenceArray[i - 1] + 1;
+                    System.out.print(emptySequenceArray[i] + " ");
+                }
+                lTerm = emptySequenceArray[4] + 1;
+                return lTerm;
+            default:
+                System.out.println("Error");
+        }
+        return lTerm;
+    }
+
+    private static void selectRule(int firstTerm, int fifthTerm) {
+        int random = 1;
+        switch (random) {
+            case 1: // Rule 1
+                System.out.println("Rule 1 Chosen");
+
+        }
+    }
+
+
+    private static int random(int min, int max) {
+        Random random = new Random();
+        return random.ints(min, max).findFirst().getAsInt();
+    }
+}
