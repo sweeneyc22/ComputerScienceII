@@ -1,0 +1,51 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+/**
+ * 12.15 (Write/Read data) Write a program to create a file named Excercise12_15.txt if it does not exist.
+ * - Write 100 integers created randomly into the file using text I/O
+ * - Read the data back from the file and display the data in increasing order
+ */
+
+
+public class Main {
+
+
+
+    public static void main(String[] args) throws FileNotFoundException {
+        java.io.File file = new java.io.File("Excercise12_15.txt");
+        ArrayList<Integer> list = new ArrayList<>();
+
+        // If Excercise12_15.txt exist
+        if (file.exists()) {
+            System.out.println("File already exists");
+            System.exit(1);
+        }
+        // Create file
+       try (PrintWriter output = new PrintWriter(file);
+            //Write 100 random integers into the file
+       ) {
+           for (int i = 0; i < 100; i++) {
+               output.print((int) (Math.random() * 100));
+               output.print(" ");
+           }
+       }
+        //Read the data back
+        try(
+                Scanner input = new Scanner(file);
+                ) {
+            while(input.hasNext()) {
+                list.add(input.nextInt());
+            }
+        }
+        //Sort Array
+        Collections.sort(list);
+
+        //Display data
+        System.out.println(list.toString());
+        System.out.println();
+    }
+}
