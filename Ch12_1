@@ -1,0 +1,44 @@
+import java.util.IllegalFormatException;
+import java.util.Scanner;
+
+public class ch12_1 {
+    public static void main(String args[]) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Enter operand1 operator operand3");
+        String expression = input.nextLine();
+        String delims = "[ ]+"; // parses out spaces
+        String[] tokens = expression.split(delims);
+
+
+        for (int i = 0; i < tokens.length; i++)
+            System.out.println(tokens[i]);
+
+        try {
+            int result = 0;
+            switch (tokens[1]) {
+                case "+":
+                    result = (Integer.parseInt(tokens[0]) + Integer.parseInt(tokens[2]));
+                    System.out.println("Result of +: " + result);
+                    break;
+                case "-":
+                    result = (Integer.parseInt(tokens[0]) - Integer.parseInt(tokens[2]));
+                    System.out.println("Result of -: " + result);
+                    break;
+                case "*":
+                    result = (Integer.parseInt(tokens[0]) * Integer.parseInt(tokens[2]));
+                    System.out.println("Result of *: " + result);
+                    break;
+                case "/":
+                    result = (Integer.parseInt(tokens[0]) / Integer.parseInt(tokens[2]));
+                    System.out.println("Result of /: " + result);
+                    break;
+                case "^":
+                    result = (Integer.parseInt(tokens[0]) ^ Integer.parseInt(tokens[2]));
+                    System.out.println("Result of ^: " + result);
+            }
+        } catch (IllegalFormatException e) {
+            e.printStackTrace();
+            }
+        }
+    }
