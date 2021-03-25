@@ -1,0 +1,34 @@
+package com.company;
+
+import java.io.*;
+
+
+/**
+ * (Decrypt files)
+ *  Suppose a file is encrypted using the scheme in Programming Exercise 17.14.
+ *  Write a program to decode an encrypted file. 
+ */
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+
+        if (args.length != 2) {
+            System.out.println("Invalid number of arguments. Usage: src target");
+        }
+
+        try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(args[0]));
+             BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(args[1]))) {
+
+            int buffer;
+            while ((buffer = in.read()) != -1) {
+                out.write(buffer - 5);
+            }
+
+            System.out.println("File decrypted");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+}
